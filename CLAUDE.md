@@ -14,15 +14,15 @@ This is a meta-repository. It contains no code. It contains documentation, archi
 | Tool | German | Meaning | Apple Framework | OpenAI Endpoint | Status |
 |------|--------|---------|-----------------|-----------------|--------|
 | [apfel](https://github.com/Arthur-Ficial/apfel) | Apfel | Apple | FoundationModels (LLM) | `/v1/chat/completions` | **Shipped** |
-| [ohr](https://github.com/Arthur-Ficial/ohr) | Ohr | Ear | SpeechAnalyzer (STT) | `/v1/audio/transcriptions` | Planned |
-| [kern](https://github.com/Arthur-Ficial/kern) | Kern | Core | NLContextualEmbedding | `/v1/embeddings` | Planned |
-| [auge](https://github.com/Arthur-Ficial/auge) | Auge | Eye | Vision (OCR) | CLI only | Planned |
+| [ohr](https://github.com/Arthur-Ficial/ohr) | Ohr | Ear | SpeechAnalyzer (STT) | `/v1/audio/transcriptions` | **Shipped** (v0.1.6) |
+| [kern](https://github.com/Arthur-Ficial/kern) | Kern | Core | NLContextualEmbedding | `/v1/embeddings` | Parked (repo is a stub, not started) |
+| [auge](https://github.com/Arthur-Ficial/auge) | Auge | Eye | Vision (OCR) | CLI only | **Shipped** (v1.9.0) |
 
 ## What We Vetted and Killed
 
 | Framework | Why Not |
 |-----------|---------|
-| Translation | SwiftUI-only API - cannot build headless CLI |
+| Translation | Not a family tool: text translation shipped outside the family as [translate](https://github.com/Arthur-Ficial/translate) (headless works; installing language models still needs a SwiftUI host) |
 | AVSpeechSynthesizer (TTS) | Cannot write audio files on macOS - only plays to speakers |
 | ImageCreator (image gen) | No headless API - requires UI context |
 | SoundAnalysis | Too niche - VAD belongs as a flag on ohr |
@@ -31,9 +31,9 @@ This is a meta-repository. It contains no code. It contains documentation, archi
 
 ## Build Order
 
-1. **ohr** - biggest gap in ecosystem, zero-dep whisper alternative
-2. **kern** - embeddings for RAG pipelines
-3. **auge** - OCR, smallest scope
+1. **ohr** - shipped (zero-dep whisper alternative)
+2. **kern** - parked: embeddings for RAG pipelines, not started
+3. **auge** - shipped (OCR)
 
 ## Naming Rules
 
@@ -80,9 +80,9 @@ Requires extracting ApfelCore as a shared Swift package. Build the individual to
 http://localhost:11434/v1/
   /chat/completions       apfel     (FoundationModels)     DONE
   /models                 apfel     (list all)             DONE
-  /audio/transcriptions   ohr       (SpeechAnalyzer)       PLANNED
-  /embeddings             kern      (NLContextualEmbedding) PLANNED
-  /audio/translations     ---       IMPOSSIBLE (Translation framework is SwiftUI-only)
+  /audio/transcriptions   ohr       (SpeechAnalyzer)       DONE
+  /embeddings             kern      (NLContextualEmbedding) PARKED
+  /audio/translations     ---       NOT BUILT (text translation lives in Arthur-Ficial/translate)
   /audio/speech           ---       IMPOSSIBLE (AVSpeechSynthesizer can't write files on macOS)
   /images/generations     ---       IMPOSSIBLE (ImageCreator is UI-only)
 ```
